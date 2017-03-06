@@ -40,15 +40,15 @@ console.log(arr.find(x => x > 1 && x < 4));
 
 console.log(
     ((arr, f) => (
-        ([head, ...rest], f, base) =>
-            typeof head !== 'undefined'
-            ? reduce(rest, f, f(base, head))
-            : base
-        )(arr, (acc, x) => [...acc, f(x)], [])
+        function reduce([head, ...rest], f, base) {
+            return typeof head !== 'undefined'
+                ? reduce(rest, f, f(base, head))
+                : base
+        })(arr, (acc, x) => [...acc, f(x)], [])
     )([1, 2, 3, 4], x => x * 2)
 );
 
-
+x
 console.log(
     (x => x * 2)(3)
 );
