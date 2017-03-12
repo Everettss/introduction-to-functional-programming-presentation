@@ -2,17 +2,85 @@
 <head>
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/white.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/highlight/atom-one-light.css">
 </head>
 <body>
 <div class="reveal">
     <div class="slides">
-        <section>Slide 1</section>
-        <section>Slide 2</section>
+        <section class="image" data-background="images/1.jpg">
+            <h2>introduction to<br />functional programing</h2>
+        </section>
+        <section class="image" data-background="images/2.jpg">
+            <h2>pure functions</h2>
+        </section>
+        <section class="image" data-background="images/3.jpg">
+            <h2>first-class functions</h2>
+        </section>
+        <section class="image" data-background="images/4.jpg">
+            <h2>higher-order function</h2>
+        </section>
+        <section class="image" data-background="images/5.jpg">
+            <h2>currying</h2>
+        </section>
+        <section class="image" data-background="images/6.jpg">
+            <h2>reduce</h2>
+        </section>
+        <section class="image" data-background="images/9.jpg">
+            <h2>delegation of logic</h2>
+        </section>
+        <section class="image" data-background="images/10.jpg">
+            <h2>identity function</h2>
+        </section>
+        <section class="image" data-background="images/7.jpg">
+            <h2>map, filter, find</h2>
+        </section>
+        <section class="image" data-background="images/8.jpg">
+            <h2>sort</h2>
+        </section>
+        <section class="image" data-background="images/11.jpg">
+            <h2>function arity and unary function</h2>
+        </section>
+        <section class="image" data-background="images/12.jpg">
+            <h2>example of solving problem in functional style</h2>
+        </section>
+        <section class="image" data-background="images/13.jpg">
+            <h2>composition of functions</h2>
+        </section>
+        <!--<section class="image" data-background="images/14.jpg">-->
+            <!--<h2>first-class functions</h2>-->
+        <!--</section>-->
+        <!--<section class="image" data-background="images/15.jpg">-->
+            <!--<h2>first-class functions</h2>-->
+        </section>
+        <section>
+            slide 2
+            <pre><code data-trim data-noescape class="javascript">
+const qsort = ([pivot, ...rest]) =>
+    rest.length
+    ? [
+        ...qsort(filter(rest, x => x <= pivot)),
+        pivot,
+        ...qsort(filter(rest, x => x > pivot))
+    ]
+    : typeof pivot !== 'undefined' ? [pivot] : [];
+
+const reduce = ([head, ...rest], f, base) =>
+    typeof head !== 'undefined'
+    ? reduce(rest, f, f(base, head))
+    : base;
+
+const map = (arr, f) => reduce(arr, (acc, x) => [...acc, f(x)], []);
+
+            </code></pre>
+        </section>
     </div>
 </div>
 <script src="js/reveal.js"></script>
+<script src="js/highlight.js"></script>
 <script>
     Reveal.initialize();
+    hljs.initHighlightingOnLoad();
 </script>
 </body>
 </html>

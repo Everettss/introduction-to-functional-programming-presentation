@@ -68,12 +68,12 @@ const arrToSort = [3, 2, 4, 1];
 
 const qsort = ([pivot, ...rest]) =>
     rest.length
-        ? [
-            ...qsort(filter(rest, x => x <= pivot)),
-            pivot,
-            ...qsort(filter(rest, x => x > pivot))
-        ]
-        : typeof pivot !== 'undefined' ? [pivot] : [];
+    ? [
+        ...qsort(filter(rest, x => x <= pivot)),
+        pivot,
+        ...qsort(filter(rest, x => x > pivot))
+    ]
+    : typeof pivot !== 'undefined' ? [pivot] : [];
 
 
 

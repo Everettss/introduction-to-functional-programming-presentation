@@ -1,0 +1,11 @@
+
+section.image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+section.image h2 {
+    color: white;
+    text-transform: lowercase;
+}
