@@ -42,3 +42,4 @@ data/logs/*.log
 data/cache/config/*.php
 data/cache/twig/*
 !data/cache/twig/.gitkeep
+package.json
