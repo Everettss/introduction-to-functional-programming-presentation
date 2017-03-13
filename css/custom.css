@@ -9,3 +9,33 @@ section.image h2 {
     color: white;
     text-transform: lowercase;
 }
+
+.reveal pre {
+    font-size: 0.45em;
+}
+
+.reveal pre.error {
+    box-shadow: 0px 0px 6px red;
+}
+
+.reveal pre.success {
+    box-shadow: 0px 0px 6px green;
+}
+
+.reveal pre code {
+    padding: 15px;
+}
+
+.reveal table th, .reveal table td {
+    font-size: 0.8em;
+    text-align: center;
+    padding: 0.2em 0.9em 0.2em 0.9em;
+    border-bottom: 1px solid;
+    font-family: monospace;
+}
+
+.reveal .highlight {
+    background-color: #8fc8dd;
+    padding: 0 5px;
+    margin: 0 -5px;
+}

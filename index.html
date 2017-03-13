@@ -14,29 +14,252 @@
         <section class="image" data-background="images/2.jpg">
             <h2>pure functions</h2>
         </section>
+        <section>
+            can't modify variables outside function scope
+            <pre class="error"><code data-trim data-noescape class="javascript">let z;
+function add(x, y) {
+    z = x + y;
+}
+add(2, 3);
+z; // 5</code></pre>
+            <pre class="success"><code data-trim data-noescape class="javascript">function add(x, y) {
+    return x + y;
+}
+add(2, 3); // 5</code></pre>
+        </section>
+        <section>
+            can't modify function arguments
+            <pre class="error"><code data-trim data-noescape class="javascript">const markPlayer = { name: 'mark', score: 100 };
+function updateScore(player) {
+    player.score++;
+}
+updateScore(markPlayer);
+updateScore(markPlayer);
+markPlayer; // { name: 'mark', score: 102 }</code></pre>
+            <pre class="success"><code data-trim data-noescape class="javascript">const markPlayer = { name: 'mark', score: 100 };
+function updateScore(player) {
+    return Object.assign({}, player, { score: player.score + 1 });
+}
+updateScore(updateScore(markPlayer)); // { name: 'mark', score: 102 }</code></pre>
+        </section>
         <section class="image" data-background="images/3.jpg">
             <h2>first-class functions</h2>
+        </section>
+        <section>
+            function can be assign to variable
+            <pre><code data-trim data-noescape class="javascript">function add(x, y) {
+    return x + y;
+}</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const add = function add(x, y) {
+    return x + y;
+};</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const add = function (x, y) {
+    return x + y;
+};</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const add = (x, y) => x + y;</code></pre>
         </section>
         <section class="image" data-background="images/4.jpg">
             <h2>higher-order function</h2>
         </section>
+        <section>
+            function can accept other function
+            <pre><code data-trim data-noescape class="javascript">function twice(x, f) {
+    return f(f(x));
+}
+function pow2(x) {
+    return x * x;
+}
+twice(2, pow2); // 16</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const twice = (x, f) => f(f(x));
+const pow2 = x => x * x;
+twice(2, pow2); // 16</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const twice = (x, f) => f(f(x));
+twice(2, x => x * x); // 16</code></pre>
+        </section>
+        <section>
+            function can return other function
+            <pre><code data-trim data-noescape class="javascript">function makePow2() {
+    return function pow2(x) {
+        return x * x;
+    }
+}
+const pow2 = makePow2();
+pow2(3); // 9</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const makePow2 = () => x => x * x;
+const pow2 = makePow2();
+pow2(3); // 9</code></pre>
+        </section>
         <section class="image" data-background="images/5.jpg">
             <h2>currying</h2>
+        </section>
+        <section>
+            curring as mechanism of remember values
+            <pre><code data-trim data-noescape class="javascript">function add(x, y) {
+    return x + y;
+}</code></pre>
+            <pre><code data-trim data-noescape class="javascript">function add(x) {
+    return function (y) {
+        return x + y;
+    }
+}</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const add = x => y => x + y;</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const add2 = add(2); // y => 2 + y;
+const add3 = add(3); // y => 3 + y;
+add2(5); // 7
+add3(5); // 8
+add(4)(5); // 9</code></pre>
         </section>
         <section class="image" data-background="images/6.jpg">
             <h2>reduce</h2>
         </section>
+        <section>
+            example
+            <pre><code data-trim data-noescape class="javascript">reduce(arr, reducerFunction, initVal);</code></pre>
+            <pre><code data-trim data-noescape class="javascript">reduce([1, 2, 3], (acc, x) => acc + x, 0); // 6</code></pre>
+            <table>
+                <tr>
+                    <th>invoke</th>
+                    <th>acc</th>
+                    <th>x</th>
+                    <th>return</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><span class="highlight">0</span></td>
+                    <td>1</td>
+                    <td>1 (0+1)</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3 (1+2)</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td><span class="highlight">6</span> (3+3)</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            implementation
+            <pre class="error"><code data-trim data-noescape class="javascript">const reduce = (arr, f, acc) => {
+    let accTemp = acc;
+    for (let i = 0; i < arr.length; i++) {
+        accTemp = f(accTemp, arr[i]);
+    }
+    return accTemp;
+};</code></pre>
+            <pre class="success"><code data-trim data-noescape class="javascript">const reduce = ([head, ...rest], f, acc) =>
+    typeof head !== 'undefined'
+    ? reduce(rest, f, f(acc, head))
+    : acc;</code></pre>
+        </section>
         <section class="image" data-background="images/9.jpg">
             <h2>delegation of logic</h2>
+        </section>
+        <section>
+            max function
+            <pre><code data-trim data-noescape class="javascript">const sum = arr => reduce(arr, (acc, x) => acc + x, 0);</code></pre>
+            <pre><code data-trim data-noescape class="javascript">max([1, 3, 2]); // 3</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const max = arr => reduce(arr, /*maxReducer*/, /*maxInitVal*/);</code></pre>
+            <pre class="fragment"><code data-trim data-noescape class="javascript">const max = arr => reduce(arr, (acc, x) => x > acc ? x : acc, arr[0]);</code></pre>
+        </section>
+        <section>
+            how to upgrade max function<br />to be more generic?
+            <pre><code data-trim data-noescape class="javascript">const max = arr => reduce(arr, (acc, x) => x > acc ? x : acc, arr[0]);</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const people = [
+    { name: 'bob', age: 18 },
+    { name: 'alice', age: 13 },
+    { name: 'steve', age: 27 }
+];
+max(people, x => x.age); // { name: 'steve', age: 27 }</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const max = (arr, f) => reduce(arr, /*maxReducer*/, /*maxInitVal*/);</code></pre>
+            <pre class="fragment"><code data-trim data-noescape class="javascript">const max = (arr, f) =>
+    reduce(arr, (acc, x) => f(x) > f(acc) ? x : acc, arr[0]);</code></pre>
+        </section>
+        <section>
+            how to extract reducer function?
+            <pre><code data-trim data-noescape class="javascript">const max = (arr, f) =>
+    reduce(arr, (acc, x) => f(x) > f(acc) ? x : acc, arr[0]);</code></pre>
+            <pre class="error"><code data-trim data-noescape class="javascript">const maxReducer = (acc, x) => f(x) > f(acc) ? x : acc;
+const max = (arr, f) => reduce(arr, maxReducer, arr[0]);</code></pre>
+            <pre class="fragment success"><code data-trim data-noescape class="javascript">const maxReducer = f => (acc, x) => f(x) > f(acc) ? x : acc;
+const max = (arr, f) => reduce(arr, maxReducer(f), arr[0]);</code></pre>
+        </section>
+        <section>
+            neutral element
+            <pre><code data-trim data-noescape class="javascript">const maxReducer = f => (acc, x) => f(x) > f(acc) ? x : acc;
+const max = (arr, f) => reduce(arr, maxReducer(f), arr[0]);</code></pre>
+            <pre class="error"><code data-trim data-noescape class="javascript">max([1, 3, 2]); // doesn't work</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const maxReducer = f => (acc, x) => f(x) > f(acc) ? x : acc;
+const max = (arr, f = /*default*/) => reduce(arr, maxReducer(f), arr[0]);</code></pre>
         </section>
         <section class="image" data-background="images/10.jpg">
             <h2>identity function</h2>
         </section>
+        <section>
+            identity function as neutral element
+            <pre><code data-trim data-noescape class="javascript">const identity = x => x;</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const maxReducer = f => (acc, x) => f(x) > f(acc) ? x : acc;
+const max = (arr, f = identity) => reduce(arr, maxReducer(f), arr[0]);</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const maxReducer = f => (acc, x) => f(x) > f(acc) ? x : acc;
+const max = (arr, f = x => x) => reduce(arr, maxReducer(f), arr[0]);</code></pre>
+            <pre class="success"><code data-trim data-noescape class="javascript">max([1, 3, 2]); // 3</code></pre>
+        </section>
         <section class="image" data-background="images/7.jpg">
             <h2>map, filter, find</h2>
         </section>
+        <section>
+            map
+            <pre><code data-trim data-noescape class="javascript">const maxReducer = f => (acc, x) => f(x) > f(acc) ? x : acc;
+const max = (arr, f) => reduce(arr, maxReducer(f), arr[0]);</code></pre>
+            <pre><code data-trim data-noescape class="javascript">map([1, 4, 2, 3], x => x * x); // [1, 16, 4, 9]</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const mapReducer = f => /* ... */
+const map = (arr, f) => reduce(arr, mapReducer(f), /* initVal */);</code></pre>
+            <pre class="fragment"><code data-trim data-noescape class="javascript">const mapReducer = f => (acc, x) => [...acc, f(x)];
+const map = (arr, f) => reduce(arr, mapReducer(f), []);</code></pre>
+        </section>
+        <section>
+            filter
+            <pre><code data-trim data-noescape class="javascript">const mapReducer = f => (acc, x) => [...acc, f(x)];
+const map = (arr, f) => reduce(arr, mapReducer(f), []);</code></pre>
+            <pre><code data-trim data-noescape class="javascript">filter([1, 4, 2, 3], x => x > 2); // [4, 3]</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const filterReducer = f => /* ... */
+const filter = (arr, f) => reduce(arr, filterReducer(f), /* initVal */);</code></pre>
+            <pre class="fragment"><code data-trim data-noescape class="javascript">const filterReducer = f => (acc, x) => f(x) ? [...acc, x] : acc;
+const filter = (arr, f) => reduce(arr, filterReducer(f), []);</code></pre>
+        </section>
+        <section>
+            find
+            <pre><code data-trim data-noescape class="javascript">const filterReducer = f => (acc, x) => f(x) ? [...acc, x] : acc;
+const filter = (arr, f) => reduce(arr, filterReducer(f), []);</code></pre>
+            <pre><code data-trim data-noescape class="javascript">find([1, 4, 2, 3], x => x > 2); // 4</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const findReducer = f => /* ... */
+const find = (arr, f) => reduce(arr, findReducer(f), /* initVal */);</code></pre>
+            <pre class="fragment"><code data-trim data-noescape class="javascript">const findReducer = f => (acc, x) => acc || (f(x) ? x : acc);
+const find = (arr, f) => reduce(arr, findReducer(f), undefined);</code></pre>
+        </section>
         <section class="image" data-background="images/8.jpg">
             <h2>sort</h2>
+        </section>
+        <section>
+            quick sort
+            <pre><code data-trim data-noescape class="javascript">const sort = ([pivot, ...rest]) =>
+    rest.length
+    ? [
+        ...sort(filter(rest, x => x <= pivot)),
+        pivot,
+        ...sort(filter(rest, x => x > pivot))
+    ]
+    : typeof pivot !== 'undefined' ? [pivot] : [];</code></pre>
+            <pre><code data-trim data-noescape class="javascript">sort([1, 4, 2, 3]); // [1, 2, 3, 4]</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const findReducer = f => /* ... */
+const find = (arr, f) => reduce(arr, findReducer(f), /* initVal */);</code></pre>
+            <pre class="fragment"><code data-trim data-noescape class="javascript">const findReducer = f => (acc, x) => acc || (f(x) ? x : acc);
+const find = (arr, f) => reduce(arr, findReducer(f), undefined);</code></pre>
         </section>
         <section class="image" data-background="images/11.jpg">
             <h2>function arity and unary function</h2>
@@ -79,7 +302,7 @@ const map = (arr, f) => reduce(arr, (acc, x) => [...acc, f(x)], []);
 <script src="js/reveal.js"></script>
 <script src="js/highlight.js"></script>
 <script>
-    Reveal.initialize();
+    Reveal.initialize({ history: true });
     hljs.initHighlightingOnLoad();
 </script>
 </body>
