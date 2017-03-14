@@ -146,7 +146,7 @@ console.log(find(arr, x => x > 1 && x < 4));
 // // );
 // //
 //
-// const arrToSort = [3, 2, 4, 1];
+const arrToSort = [3, 2, 4, 1];
 //
 // // function qsort(arr) {
 // //     if (arr.length <= 1)
@@ -159,30 +159,41 @@ console.log(find(arr, x => x > 1 && x < 4));
 // //     ];
 // // }
 //
-const sort = ([pivot, ...rest]) =>
+// const sort = ([pivot, ...rest]) =>
+//     rest.length
+//     ? [
+//         ...qsort(filter(rest, x => x <= pivot)),
+//         pivot,
+//         ...qsort(filter(rest, x => x > pivot))
+//     ]
+//     : typeof pivot !== 'undefined' ? [pivot] : [];
+//
+//
+//
+const sort = ([pivot, ...rest], f) =>
     rest.length
     ? [
-        ...qsort(filter(rest, x => x <= pivot)),
+        ...sort(filter(rest, x => f(x, pivot) <= 0), f),
         pivot,
-        ...qsort(filter(rest, x => x > pivot))
+        ...sort(filter(rest, x => f(x, pivot) > 0), f)
     ]
     : typeof pivot !== 'undefined' ? [pivot] : [];
 //
 //
-//
-// const sort = ([pivot, ...rest], f) =>
-//     rest.length
-//         ? [
-//             ...sort(filter(rest, x => f(x, pivot) <= 0), f),
-//             pivot,
-//             ...sort(filter(rest, x => f(x, pivot) > 0), f)
-//         ]
-//         : typeof pivot !== 'undefined' ? [pivot] : [];
-//
-//
 // // console.log(qsort(arrToSort));
-// // console.log(arrToSort.sort((a, b) => a < b ? 1 : -1));
-// // console.log(sort(arrToSort, (a, b) => a < b ? 1 : -1));
+// console.log(arrToSort.sort((a, b) => a < b ? -1 : 1));
+console.log(sort([1, 4, 2, 3], (a, b) => a < b ? -1 : 1));
+console.log(sort([1, 4, 2, 3], (a, b) => a < b ? 1 : -1));
+
+
+const people = [
+    { name: 'bob', age: 18 },
+    { name: 'alice', age: 13 },
+    { name: 'steve', age: 27 }
+];
+sort(people, (a, b) => a.age < b.age ? -1 : 1);
+console.log(sort(people, (a, b) => a.age < b.age ? -1 : 1)); // { name: 'steve', age: 27 }
+
 // //
 // //
 // // console.log(arrToSort.sort((a, b) => a > b ? 1 : -1));
@@ -222,24 +233,24 @@ const sort = ([pivot, ...rest]) =>
 
 // const max = arr => reduce(arr, (acc, x) => x > acc ? x : acc, arr[0]);
 // const max = arr => reduce(arr, maxReducer, maxInitVal);
-const sum = arr => reduce(arr, (acc, x) => acc + x, 0);
-
-// console.log(max([1, 3, 2]));
-console.log(sum([1, 3, 2]));
-
-// const max = (arr, f = x => x) =>
-//     reduce(arr, (acc, x) => f(x) > f(acc) ? x : acc, arr[0]);
-
-const maxReducer = f => (acc, x) => f(x) > f(acc) ? x : acc;
-const max = (arr, f) => reduce(arr, maxReducer(f), arr[0]);
-
-const people = [
-    { name: 'bob', age: 18 },
-    { name: 'alice', age: 13 },
-    { name: 'steve', age: 27 }
-];
-max(people, x => x.age); // { name: 'steve', age: 27 }
-console.log(max(people, x => x.age));
+// const sum = arr => reduce(arr, (acc, x) => acc + x, 0);
+//
+// // console.log(max([1, 3, 2]));
+// console.log(sum([1, 3, 2]));
+//
+// // const max = (arr, f = x => x) =>
+// //     reduce(arr, (acc, x) => f(x) > f(acc) ? x : acc, arr[0]);
+//
+// const maxReducer = f => (acc, x) => f(x) > f(acc) ? x : acc;
+// const max = (arr, f) => reduce(arr, maxReducer(f), arr[0]);
+//
+// const people = [
+//     { name: 'bob', age: 18 },
+//     { name: 'alice', age: 13 },
+//     { name: 'steve', age: 27 }
+// ];
+// max(people, x => x.age); // { name: 'steve', age: 27 }
+// console.log(max(people, x => x.age));
 
 //
 // // console.log(max(arrToSort));

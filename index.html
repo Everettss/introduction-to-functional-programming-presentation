@@ -256,10 +256,40 @@ const find = (arr, f) => reduce(arr, findReducer(f), undefined);</code></pre>
     ]
     : typeof pivot !== 'undefined' ? [pivot] : [];</code></pre>
             <pre><code data-trim data-noescape class="javascript">sort([1, 4, 2, 3]); // [1, 2, 3, 4]</code></pre>
-            <pre><code data-trim data-noescape class="javascript">const findReducer = f => /* ... */
-const find = (arr, f) => reduce(arr, findReducer(f), /* initVal */);</code></pre>
-            <pre class="fragment"><code data-trim data-noescape class="javascript">const findReducer = f => (acc, x) => acc || (f(x) ? x : acc);
-const find = (arr, f) => reduce(arr, findReducer(f), undefined);</code></pre>
+        </section>
+        <section>
+            more generic sort
+            <pre><code data-trim data-noescape class="javascript">// if returned val is <= 0 a before b
+// if returned val is > 0 b before a</code></pre>
+            <pre><code data-trim data-noescape class="javascript">sort([1, 4, 2, 3], (a, b) => a < b ? -1 : 1); // [1, 2, 3, 4]</code></pre>
+            <pre><code data-trim data-noescape class="javascript">sort([1, 4, 2, 3], (a, b) => a < b ? 1 : -1); // [4, 3, 2, 1]</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const people = [
+    { name: 'bob', age: 18 },
+    { name: 'alice', age: 13 },
+    { name: 'steve', age: 27 }
+];
+sort(people, (a, b) => a.age < b.age ? -1 : 1);
+// [ { name: 'alice', age: 13 },
+//   { name: 'bob', age: 18 },
+//   { name: 'steve', age: 27 } ]</code></pre>
+        </section>
+        <section>
+            <pre><code data-trim data-noescape class="javascript">const sort = ([pivot, ...rest]) =>
+    rest.length
+    ? [
+        ...sort(filter(rest, x => x <= pivot)),
+        pivot,
+        ...sort(filter(rest, x => x > pivot))
+    ]
+    : typeof pivot !== 'undefined' ? [pivot] : [];</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const sort = ([pivot, ...rest], f) =>
+    rest.length
+    ? [
+        ...sort(filter(rest, x => f(x, pivot) <= 0), f),
+        pivot,
+        ...sort(filter(rest, x => f(x, pivot) > 0), f)
+    ]
+    : typeof pivot !== 'undefined' ? [pivot] : [];</code></pre>
         </section>
         <section class="image" data-background="images/11.jpg">
             <h2>function arity and unary function</h2>
