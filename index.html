@@ -312,7 +312,7 @@ sort(people, (a, b) => a.age < b.age ? -1 : 1);
         ...sort(filter(rest, x => x > pivot))
     ]
     : typeof pivot !== 'undefined' ? [pivot] : [];</code></pre>
-            <pre><code data-trim data-noescape class="javascript">const sort = ([pivot, ...rest], f) =>
+            <pre><code data-trim data-noescape class="javascript">const sort = ([pivot, ...rest], <mark>f</mark>) =>
     rest.length
     ? [
         ...sort(filter(rest, x => <mark>f(x, pivot) <= 0)</mark>, <mark>f</mark>),
