@@ -75,3 +75,11 @@ section.image h2 {
     color: #6f6f6f;
     font-size: 0.6em;
 }
+
+.progress, .slide-number {
+    transition: 0.5s opacity;
+}
+
+.cover .progress, .cover .slide-number {
+    opacity: 0;
+}

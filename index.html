@@ -10,7 +10,7 @@
 <body>
 <div class="reveal">
     <div class="slides">
-        <section class="image" data-background="images/1.jpg">
+        <section class="image" data-state="cover" data-background="images/1.jpg">
             <h2>introduction to<br />functional programming</h2>
         </section>
         <section>
@@ -40,7 +40,7 @@
         <section>
             <img class="stretch" src="images/mc.png" alt="Module Counts">
         </section>
-        <section class="image" data-background="images/2.jpg">
+        <section class="image" data-state="cover" data-background="images/2.jpg">
             <h2>pure functions<br />&<br />mutations</h2>
         </section>
         <section>
@@ -71,7 +71,7 @@ function updateScore(player) {
 }
 updateScore(updateScore(markPlayer)); // { name: 'mark', score: 102 }</code></pre>
         </section>
-        <section class="image" data-background="images/3.jpg">
+        <section class="image" data-state="cover" data-background="images/3.jpg">
             <h2>first-class functions</h2>
         </section>
         <section>
@@ -87,7 +87,7 @@ updateScore(updateScore(markPlayer)); // { name: 'mark', score: 102 }</code></pr
 };</code></pre>
             <pre><code data-trim data-noescape class="javascript">const add = (x, y) => x + y;</code></pre>
         </section>
-        <section class="image" data-background="images/4.jpg">
+        <section class="image" data-state="cover" data-background="images/4.jpg">
             <h2>higher-order function</h2>
         </section>
         <section>
@@ -118,7 +118,7 @@ pow2(3); // 9</code></pre>
 const pow2 = makePow2();
 pow2(3); // 9</code></pre>
         </section>
-        <section class="image" data-background="images/5.jpg">
+        <section class="image" data-state="cover" data-background="images/5.jpg">
             <h2>currying</h2>
         </section>
         <section>
@@ -138,7 +138,7 @@ add2(5); // 7
 add3(5); // 8
 add(4)(5); // 9</code></pre>
         </section>
-        <section class="image" data-background="images/6.jpg">
+        <section class="image" data-state="cover" data-background="images/6.jpg">
             <h2>reduce</h2>
         </section>
         <section>
@@ -186,7 +186,7 @@ add(4)(5); // 9</code></pre>
     ? reduce(rest, f, f(acc, head))
     : acc;</code></pre>
         </section>
-        <section class="image" data-background="images/9.jpg">
+        <section class="image" data-state="cover" data-background="images/9.jpg">
             <h2>delegation of logic</h2>
         </section>
         <section>
@@ -226,7 +226,7 @@ const max = (arr, f) => reduce(arr, maxReducer(f), arr[0]);</code></pre>
             <pre><code data-trim data-noescape class="javascript">const maxReducer = f => (acc, x) => f(x) > f(acc) ? x : acc;
 const max = (arr, f = /*default*/) => reduce(arr, maxReducer(f), arr[0]);</code></pre>
         </section>
-        <section class="image" data-background="images/10.jpg">
+        <section class="image" data-state="cover" data-background="images/10.jpg">
             <h2>identity function</h2>
         </section>
         <section>
@@ -238,7 +238,7 @@ const max = (arr, f = identity) => reduce(arr, maxReducer(f), arr[0]);</code></p
 const max = (arr, f = x => x) => reduce(arr, maxReducer(f), arr[0]);</code></pre>
             <pre class="success"><code data-trim data-noescape class="javascript">max([1, 3, 2]); // 3</code></pre>
         </section>
-        <section class="image" data-background="images/7.jpg">
+        <section class="image" data-state="cover" data-background="images/7.jpg">
             <h2>map, filter, find</h2>
         </section>
         <section>
@@ -271,7 +271,7 @@ const find = (arr, f) => reduce(arr, findReducer(f), /* initVal */);</code></pre
             <pre class="fragment"><code data-trim data-noescape class="javascript">const findReducer = f => (acc, x) => acc || (f(x) ? x : acc);
 const find = (arr, f) => reduce(arr, findReducer(f), undefined);</code></pre>
         </section>
-        <section class="image" data-background="images/8.jpg">
+        <section class="image" data-state="cover" data-background="images/8.jpg">
             <h2>sort</h2>
         </section>
         <section>
@@ -320,7 +320,7 @@ sort(people, (a, b) => a.age < b.age ? -1 : 1);
     ]
     : typeof pivot !== 'undefined' ? [pivot] : [];</code></pre>
         </section>
-        <section class="image" data-background="images/13.jpg">
+        <section class="image" data-state="cover" data-background="images/13.jpg">
             <h2>composition of functions</h2>
         </section>
         <section>
@@ -357,7 +357,7 @@ sort(people, (a, b) => a.age < b.age ? -1 : 1);
             <pre><code data-trim data-noescape class="javascript">const pipe = (...fArr) => x => reduce(fArr, (acc, f) => f(acc), x);</code></pre>
             <pre><code data-trim data-noescape class="javascript">pipe(findMature, sortByPower, first3, powerBonus)(people);</code></pre>
         </section>
-        <section class="image" data-background="images/11.jpg">
+        <section class="image" data-state="cover" data-background="images/11.jpg">
             <h2>useful links</h2>
         </section>
         <section>
@@ -399,24 +399,24 @@ sort(people, (a, b) => a.age < b.age ? -1 : 1);
                 </ul>
             </div>
         </section>
-        <section class="image" data-background="images/12.jpg">
+        <section class="image" data-state="cover" data-background="images/12.jpg">
             <h2>end</h2>
         </section>
         <section>
             <img class="stretch no-shadow" src="images/dontgiveup.png" alt="Promise of FP">
             <q class="quote-small">Functional-Light JavaScript by Kyle Simpson</q>
         </section>
-        <!--<section class="image" data-background="images/14.jpg">-->
+        <!--<section class="image" data-state="cover" data-background="images/14.jpg">-->
             <!--<h2>first-class functions</h2>-->
         <!--</section>-->
-        <!--<section class="image" data-background="images/15.jpg">-->
+        <!--<section class="image" data-state="cover" data-background="images/15.jpg">-->
             <!--<h2>first-class functions</h2>-->
     </div>
 </div>
 <script src="js/reveal.js"></script>
 <script src="js/highlight.js"></script>
 <script>
-    Reveal.initialize({ history: true, controls: false });
+    Reveal.initialize({ history: true, controls: false, slideNumber: true });
     hljs.initHighlightingOnLoad();
 </script>
 </body>
