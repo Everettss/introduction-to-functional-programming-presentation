@@ -41,7 +41,7 @@
             <img class="stretch" src="images/mc.png" alt="Module Counts">
         </section>
         <section class="image" data-state="cover" data-background="images/2.jpg">
-            <h2>pure functions<br />&<br />mutations</h2>
+            <h2>pure function<br />&<br />mutation</h2>
         </section>
         <section>
             can't modify variables outside function scope
@@ -69,10 +69,11 @@ markPlayer; // { name: 'mark', score: 102 }</code></pre>
 function updateScore(player) {
     return Object.assign({}, player, { score: player.score + 1 });
 }
-updateScore(updateScore(markPlayer)); // { name: 'mark', score: 102 }</code></pre>
+updateScore(updateScore(markPlayer)); // { name: 'mark', score: 102 }
+markPlayer; // { name: 'mark', score: 100 }</code></pre>
         </section>
         <section class="image" data-state="cover" data-background="images/3.jpg">
-            <h2>first-class functions</h2>
+            <h2>first-class function</h2>
         </section>
         <section>
             function can be assign to variable
