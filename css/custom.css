@@ -1,4 +1,12 @@
 
+.reveal {
+    font-family: 'Open Sans', Helvetica, sans-serif;
+}
+
+.reveal pre code {
+    font-family: 'Source Code Pro', monospace;
+}
+
 section.image {
     background-size: cover;
     background-repeat: no-repeat;
