@@ -46,10 +46,11 @@ section.image h2 {
     font-family: monospace;
 }
 
-.reveal .highlight {
-    background-color: #8fc8dd;
-    padding: 0 5px;
-    margin: 0 -5px;
+.reveal .highlight, .reveal mark {
+    padding: 0 2px;
+    margin: 0 -2px;
+    display: inline-block;
+    background-color: #b0d9e8;
 }
 
 .reveal section img {
