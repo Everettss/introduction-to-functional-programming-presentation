@@ -185,14 +185,14 @@ const sort = ([pivot, ...rest], f) =>
 console.log(sort([1, 4, 2, 3], (a, b) => a < b ? -1 : 1));
 console.log(sort([1, 4, 2, 3], (a, b) => a < b ? 1 : -1));
 
-
-const people = [
-    { name: 'bob', age: 18 },
-    { name: 'alice', age: 13 },
-    { name: 'steve', age: 27 }
-];
-sort(people, (a, b) => a.age < b.age ? -1 : 1);
-console.log(sort(people, (a, b) => a.age < b.age ? -1 : 1)); // { name: 'steve', age: 27 }
+//
+// const people = [
+//     { name: 'bob', age: 18 },
+//     { name: 'alice', age: 13 },
+//     { name: 'steve', age: 27 }
+// ];
+// sort(people, (a, b) => a.age < b.age ? -1 : 1);
+// console.log(sort(people, (a, b) => a.age < b.age ? -1 : 1)); // { name: 'steve', age: 27 }
 
 // //
 // //
@@ -200,14 +200,14 @@ console.log(sort(people, (a, b) => a.age < b.age ? -1 : 1)); // { name: 'steve',
 // // console.log(sort(arrToSort, (a, b) => a > b ? 1 : -1));
 // //
 // //
-// const characters = [
-//     {name: 'Aublario', age: 18, power: 130},
-//     {name: 'Honser', age: 13, power: 250},
-//     {name: 'Bzothibhokh', age: 19, power: 80},
-//     {name: 'Per', age: 28, power: 20},
-//     {name: 'Goexisco', age: 12, power: 170},
-//     {name: 'Sploppend', age: 31, power: 110},
-// ];
+const people = [
+    {name: 'Aublario', age: 18, power: 130},
+    {name: 'Honser', age: 13, power: 250},
+    {name: 'Bzothibhokh', age: 19, power: 80},
+    {name: 'Per', age: 28, power: 20},
+    {name: 'Goexisco', age: 12, power: 170},
+    {name: 'Sploppend', age: 31, power: 110},
+];
 // //
 // // console.log(arrT.sort((a, b) => a.age < b.age ? -1 : 1));
 // // console.log(sort(arrT, (a, b) => a.age < b.age ? -1 : 1));
@@ -256,15 +256,15 @@ console.log(sort(people, (a, b) => a.age < b.age ? -1 : 1)); // { name: 'steve',
 // // console.log(max(arrToSort));
 // // console.log(max(arrT, x => x.age));
 //
-// const pipe = (...f) => x => reduce(f, (acc, v) => v(acc), x);
+const pipe = (...f) => x => reduce(f, (acc, v) => v(acc), x);
 //
-// const findMature = arr => filter(arr, x => x.age >= 18);
-// const sortByPower = arr => sort(arr, (a, b) => a.power > b.power ? -1 : 1);
-// const multiplyPower = arr => map(arr, x => Object.assign({}, x, { power: x.power * 1.5 }));
-// const first3 = arr => reduce(arr, (acc, x) => acc.length >= 3 ?  acc : [...acc, x], []);
-//
-// console.log(first3(multiplyPower(sortByPower(findMature(characters)))));
-// console.log(pipe(findMature, sortByPower, multiplyPower, first3)(characters));
+const findMature = arr => filter(arr, x => x.age >= 18);
+const sortByPower = arr => sort(arr, (a, b) => a.power < b.power ? 1 : -1);
+const first3 = arr => reduce(arr, (acc, x) => acc.length >= 3 ?  acc : [...acc, x], []);
+const powerBonus = arr => map(arr, x => Object.assign({}, x, { power: x.power * 1.5 }));
+console.log(sortByPower(people));
+// console.log(powerBonus(first3(sortByPower(findMature(people)))));
+// console.log(pipe(findMature, sortByPower, first3, powerBonus)(people));
 //
 // const unary = f => x => f(x);
 //

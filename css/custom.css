@@ -39,3 +39,27 @@ section.image h2 {
     padding: 0 5px;
     margin: 0 -5px;
 }
+
+.reveal section img {
+    border: none;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.25);
+}
+
+.reveal section img.no-shadow {
+    box-shadow: none;
+}
+
+.reveal .progress {
+    height: 8px;
+}
+
+.reveal .progress .span {
+    background: #10acd4;
+}
+
+.reveal .quote-small {
+    display: block;
+    padding-top: 30px;
+    color: #6f6f6f;
+    font-size: 0.6em;
+}

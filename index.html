@@ -11,8 +11,35 @@
         <section class="image" data-background="images/1.jpg">
             <h2>introduction to<br />functional programing</h2>
         </section>
+        <section>
+            <img class="no-shadow" src="images/js.png " alt="js logo">
+        </section>
+        <section>
+            <img class="stretch" src="images/so1.png" alt="Stack Overflow most popular technologies 2016">
+        </section>
+        <section data-transition="none">
+            <img class="stretch" src="images/so1b.png" alt="Stack Overflow most popular technologies 2016">
+        </section>
+        <section>
+            <img class="stretch" src="images/so2.png" alt="Stack Overflow related technologies 2 2016">
+        </section>
+        <section data-transition="none">
+            <img class="stretch" src="images/so2b.png" alt="Stack Overflow related technologies 2 2016">
+        </section>
+        <section>
+            <img class="stretch" src="images/so3.png" alt="Stack Overflow related technologies 4 2016">
+        </section>
+        <section data-transition="none">
+            <img class="stretch" src="images/so3b.png" alt="Stack Overflow related technologies 4 2016">
+        </section>
+        <section>
+            <img class="stretch" src="images/gh.png" alt="GitHub">
+        </section>
+        <section>
+            <img class="stretch" src="images/mc.png" alt="Module Counts">
+        </section>
         <section class="image" data-background="images/2.jpg">
-            <h2>pure functions</h2>
+            <h2>pure functions<br />&<br />mutations</h2>
         </section>
         <section>
             can't modify variables outside function scope
@@ -291,48 +318,103 @@ sort(people, (a, b) => a.age < b.age ? -1 : 1);
     ]
     : typeof pivot !== 'undefined' ? [pivot] : [];</code></pre>
         </section>
-        <section class="image" data-background="images/11.jpg">
-            <h2>function arity and unary function</h2>
-        </section>
-        <section class="image" data-background="images/12.jpg">
-            <h2>example of solving problem in functional style</h2>
-        </section>
         <section class="image" data-background="images/13.jpg">
             <h2>composition of functions</h2>
+        </section>
+        <section>
+            <pre><code data-trim data-noescape class="javascript">const people = [
+    {name: 'Aublario', age: 18, power: 130},
+    {name: 'Honser', age: 13, power: 250},
+    {name: 'Bzothibhokh', age: 19, power: 80},
+    {name: 'Per', age: 28, power: 20},
+    {name: 'Goexisco', age: 12, power: 170},
+    {name: 'Sploppend', age: 31, power: 110},
+];</code></pre>
+            <pre><code data-trim data-noescape class="javascript">// find first 3 mature people with the greatest power
+// give them 50% more power</code></pre>
+            <pre><code data-trim data-noescape class="javascript">[ { name: 'Aublario', age: 18, power: 195 },
+  { name: 'Sploppend', age: 31, power: 165 },
+  { name: 'Bzothibhokh', age: 19, power: 120 } ]</code></pre>
+        </section>
+        <section>
+            <pre><code data-trim data-noescape class="javascript">// find first 3 mature people with the greatest power
+// give them 50% more power</code></pre>
+            <pre><code data-trim data-noescape class="javascript">// findMature -> sortByPower -> first3 -> powerBonus</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const findMature = arr =>
+    filter(arr, x => x.age >= 18);</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const sortByPower = arr =>
+    sort(arr, (a, b) => a.power < b.power ? 1 : -1);</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const first3 = arr =>
+    reduce(arr, (acc, x) => acc.length >= 3 ? acc : [...acc, x], []);</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const powerBonus = arr =>
+    map(arr, x => Object.assign({}, x, { power: x.power * 1.5 }));</code></pre>
+        </section>
+        <section>
+            <pre><code data-trim data-noescape class="javascript">// findMature -> sortByPower -> first3 -> powerBonus</code></pre>
+            <pre><code data-trim data-noescape class="javascript">powerBonus(first3(sortByPower(findMature(people))));</code></pre>
+            <pre><code data-trim data-noescape class="javascript">const pipe = (...fArr) => x => reduce(fArr, (acc, f) => f(acc), x);</code></pre>
+            <pre><code data-trim data-noescape class="javascript">pipe(findMature, sortByPower, first3, powerBonus)(people);</code></pre>
+        </section>
+        <section class="image" data-background="images/11.jpg">
+            <h2>useful links</h2>
+        </section>
+        <section>
+            libraries
+            <br /><br />
+            <div>
+                <table>
+                    <tr>
+                        <td><a href="http://ramdajs.com/">Ramda</a> <br/> <img src="images/ramda.png" alt="Ramda logo"></td>
+                        <td><a href="https://facebook.github.io/immutable-js/">Immutable</a> <br/> <img src="images/immutable.png" alt="Immutable logo"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section>
+            learn more
+            <div>
+                <ul>
+                    <li>
+                        <a href="https://www.edx.org/course/introduction-functional-programming-delftx-fp101x-0">
+                            edX Video Course - Introduction to Functional Programming by Erik Meijer
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/getify/Functional-Light-JS">
+                            GitHub Book - Functional-Light JavaScript by Kyle Simpson
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://medium.com/javascript-scene/the-rise-and-fall-and-rise-of-functional-programming-composable-software-c2d91b424c8c">
+                            Medium article series - Composing Software by Eric Elliott
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://hackernoon.com/rethinking-javascript-the-if-statement-b158a61cd6cb">
+                            Medium article series - Rethinking JavaScript by Joel Thoms
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="image" data-background="images/12.jpg">
+            <h2>end</h2>
+        </section>
+        <section>
+            <img class="stretch no-shadow" src="images/dontgiveup.png" alt="Promise of FP">
+            <q class="quote-small">Functional-Light JavaScript by Kyle Simpson</q>
         </section>
         <!--<section class="image" data-background="images/14.jpg">-->
             <!--<h2>first-class functions</h2>-->
         <!--</section>-->
         <!--<section class="image" data-background="images/15.jpg">-->
             <!--<h2>first-class functions</h2>-->
-        </section>
-        <section>
-            slide 2
-            <pre><code data-trim data-noescape class="javascript">
-const qsort = ([pivot, ...rest]) =>
-    rest.length
-    ? [
-        ...qsort(filter(rest, x => x <= pivot)),
-        pivot,
-        ...qsort(filter(rest, x => x > pivot))
-    ]
-    : typeof pivot !== 'undefined' ? [pivot] : [];
-
-const reduce = ([head, ...rest], f, base) =>
-    typeof head !== 'undefined'
-    ? reduce(rest, f, f(base, head))
-    : base;
-
-const map = (arr, f) => reduce(arr, (acc, x) => [...acc, f(x)], []);
-
-            </code></pre>
-        </section>
     </div>
 </div>
 <script src="js/reveal.js"></script>
 <script src="js/highlight.js"></script>
 <script>
-    Reveal.initialize({ history: true });
+    Reveal.initialize({ history: true, controls: false });
     hljs.initHighlightingOnLoad();
 </script>
 </body>
