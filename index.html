@@ -123,7 +123,7 @@ pow2(3); // 9</code></pre>
             <h2>currying</h2>
         </section>
         <section>
-            curring as mechanism of remember values
+            curring as a mechanism for remembering values
             <pre><code data-trim data-noescape class="javascript">function add(x, y) {
     return x + y;
 }</code></pre>
@@ -133,8 +133,8 @@ pow2(3); // 9</code></pre>
     }
 }</code></pre>
             <pre><code data-trim data-noescape class="javascript">const add = x => y => x + y;</code></pre>
-            <pre><code data-trim data-noescape class="javascript">const add2 = add(2); // y => 2 + y;
-const add3 = add(3); // y => 3 + y;
+            <pre><code data-trim data-noescape class="javascript">const add2 = add(2); // y => x + y; x is curried as 2
+const add3 = add(3); // y => x + y; x is curried as 3
 add2(5); // 7
 add3(5); // 8
 add(4)(5); // 9</code></pre>
